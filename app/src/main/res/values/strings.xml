@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Present!</string>
+    <string name="wrong_role">Wrong role selected.</string>
+    <string name="no_account">Don\'t have an account? Register</string>
+    <string name="has_account">Already have an account? Log In</string>
+    <string name="delete_confirm">Delete event? This cannot be undone.</string>
+</resources>

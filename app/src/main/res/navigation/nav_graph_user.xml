@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_user"
+    app:startDestination="@id/userHomeFragment">
+
+    <fragment
+        android:id="@+id/userHomeFragment"
+        android:name="com.example.present.ui.user.home.UserHomeFragment"
+        android:label="Home" />
+
+    <!-- Renamed from qrFragment to scannerFragment to match UserMainActivity -->
+    <fragment
+        android:id="@+id/scannerFragment"
+        android:name="com.example.present.ui.user.qr.QRFragment"
+        android:label="Check-in" />
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.present.ui.user.history.HistoryFragment"
+        android:label="History" />
+
+    <!-- Renamed from profileFragment to userProfileFragment to match UserMainActivity -->
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.example.present.ui.user.profile.UserProfileFragment"
+        android:label="Profile" />
+
+</navigation>

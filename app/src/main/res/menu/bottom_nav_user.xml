@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/userHomeFragment"
+        android:title="Home"
+        android:icon="@drawable/ic_home" />
+
+    <!-- CHANGE THIS ID from qrFragment to scannerFragment -->
+    <item android:id="@+id/scannerFragment"
+        android:title="Scan"
+        android:icon="@drawable/ic_scanner" />
+
+    <item android:id="@+id/historyFragment"
+        android:title="History"
+        android:icon="@drawable/ic_history" />
+
+    <item android:id="@+id/userProfileFragment"
+        android:title="Profile"
+        android:icon="@drawable/ic_profile" />
+</menu>

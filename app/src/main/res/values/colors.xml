@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#7C5CFC</color>
+    <color name="colorSecondary">#22C55E</color>
+    <color name="colorBackground">#0E0F16</color>
+    <color name="colorSurface">#161720</color>
+    <color name="colorOnSurface">#F0F0F5</color>
+    <color name="colorMuted">#6B6E8E</color>
+    <color name="colorError">#EF4444</color>
+    <color name="colorVerified">#22C55E</color>
+    <color name="colorFlagged">#F59E0B</color>
+    
+    <!-- This is the missing color causing your error -->
+    <color name="colorBorder">#2A2B3D</color>
+</resources>
