@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0E0F16"
+    android:background="@color/colorBackground"
     android:orientation="vertical"
     android:padding="20dp">
 
@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Attendance History"
-        android:textColor="#F0F0F5"
+        android:textColor="@color/colorOnSurface"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="Review your past event check-ins"
-        android:textColor="#6B6E8E"
+        android:textColor="@color/colorMuted"
         android:textSize="14sp" />
 
     <!-- Summary Stats Card -->
@@ -29,9 +29,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        app:cardBackgroundColor="#161720"
+        app:cardBackgroundColor="@color/colorSurface"
         app:cardCornerRadius="16dp"
-        app:strokeColor="#1E1F2B"
+        app:strokeColor="@color/colorBorder"
         app:strokeWidth="1dp">
 
         <LinearLayout
@@ -45,7 +45,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/ic_history"
-                app:tint="#7C5CFC" />
+                app:tint="@color/colorPrimary" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Total Events Attended"
-                    android:textColor="#6B6E8E"
+                    android:textColor="@color/colorMuted"
                     android:textSize="12sp" />
 
                 <TextView
@@ -65,22 +65,29 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:textColor="#F0F0F5"
+                    android:textColor="@color/colorOnSurface"
                     android:textSize="22sp"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- History List -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvHistory"
+    <!-- ADDED: SwipeRefreshLayout -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginTop="16dp"
-        android:clipToPadding="false"
-        android:paddingBottom="80dp" />
+        android:layout_marginTop="16dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvHistory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="20dp" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <!-- Empty State -->
     <LinearLayout
@@ -96,7 +103,7 @@
             android:layout_height="80dp"
             android:alpha="0.3"
             android:src="@drawable/ic_history"
-            app:tint="#6B6E8E" />
+            app:tint="@color/colorMuted" />
 
         <TextView
             android:id="@+id/tvEmpty"
@@ -104,7 +111,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="No check-ins found yet."
-            android:textColor="#6B6E8E"
+            android:textColor="@color/colorMuted"
             android:textSize="16sp" />
     </LinearLayout>
 

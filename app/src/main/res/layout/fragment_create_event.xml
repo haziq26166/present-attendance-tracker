@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0E0F16">
+    android:background="@color/colorBackground">
 
     <com.example.present.ui.user.qr.StepIndicatorView
         android:id="@+id/stepIndicatorAdmin"
@@ -22,26 +22,142 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/stepIndicatorAdmin">
 
-        <EditText android:id="@+id/etEventName" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Event Title" android:textColorHint="#6B6E8E" android:textColor="#F0F0F5"/>
-        <EditText android:id="@+id/etDescription" android:layout_width="match_parent" android:layout_height="100dp" android:hint="Description" android:gravity="top" android:textColor="#F0F0F5"/>
-        <EditText android:id="@+id/etVenueName" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Venue Name" android:textColor="#F0F0F5"/>
-        <EditText android:id="@+id/etMaxCapacity" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Capacity" android:inputType="number" android:textColor="#F0F0F5"/>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Event Title"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:hintTextColor="@color/colorPrimary">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEventName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorOnSurface" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.button.MaterialButton android:id="@+id/btnPickDate" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Select Date" style="@style/Widget.MaterialComponents.Button.OutlinedButton" android:layout_marginTop="10dp"/>
-        <TextView android:id="@+id/tvSelectedDate" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="No date selected" android:textColor="#6B6E8E" android:layout_gravity="center_horizontal"/>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="Description"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:hintTextColor="@color/colorPrimary">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDescription"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="top"
+                android:textColor="@color/colorOnSurface" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:weightSum="2" android:layout_marginTop="10dp">
-            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
-                <com.google.android.material.button.MaterialButton android:id="@+id/btnPickStartTime" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Start Time" style="@style/Widget.MaterialComponents.Button.TextButton"/>
-                <TextView android:id="@+id/tvStartTime" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="09:00 AM" android:textColor="#F0F0F5"/>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="Venue Name"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:hintTextColor="@color/colorPrimary">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etVenueName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorOnSurface" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="Capacity"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:hintTextColor="@color/colorPrimary">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etMaxCapacity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textColor="@color/colorOnSurface" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPickDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Date"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorPrimary"
+            app:strokeColor="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/tvSelectedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No date selected"
+            android:textColor="@color/colorMuted"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginTop="10dp">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPickStartTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Start Time"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:textColor="@color/colorPrimary" />
+                <TextView
+                    android:id="@+id/tvStartTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="09:00 AM"
+                    android:textColor="@color/colorOnSurface" />
             </LinearLayout>
-            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center">
-                <com.google.android.material.button.MaterialButton android:id="@+id/btnPickEndTime" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="End Time" style="@style/Widget.MaterialComponents.Button.TextButton"/>
-                <TextView android:id="@+id/tvEndTime" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="05:00 PM" android:textColor="#F0F0F5"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPickEndTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="End Time"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:textColor="@color/colorPrimary" />
+                <TextView
+                    android:id="@+id/tvEndTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="05:00 PM"
+                    android:textColor="@color/colorOnSurface" />
             </LinearLayout>
         </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton android:id="@+id/btnNextStep1" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="20dp" android:text="Next: Map"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNextStep1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Next: Map"
+            android:textColor="@color/colorButtonText"
+            app:backgroundTint="@color/colorButton" />
     </LinearLayout>
 
     <!-- STEP 2: MAP & GEOFENCE -->
@@ -54,7 +170,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/stepIndicatorAdmin">
 
-        <!-- Map takes up the top section -->
         <fragment
             android:id="@+id/map_create"
             android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -62,14 +177,13 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <!-- Improvised Control Panel -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            app:cardBackgroundColor="#161720"
+            app:cardBackgroundColor="@color/colorSurface"
             app:cardCornerRadius="16dp"
-            app:strokeColor="#1E1F2B"
+            app:strokeColor="@color/colorBorder"
             app:strokeWidth="1dp">
 
             <LinearLayout
@@ -83,7 +197,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Geofence Radius: 100m"
-                    android:textColor="#F0F0F5"
+                    android:textColor="@color/colorOnSurface"
                     android:textStyle="bold"
                     android:textSize="16sp"/>
 
@@ -91,7 +205,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tap map to set venue, then adjust radius below"
-                    android:textColor="#6B6E8E"
+                    android:textColor="@color/colorMuted"
                     android:textSize="12sp"
                     android:layout_marginTop="4dp"/>
 
@@ -101,8 +215,8 @@
                     android:layout_height="wrap_content"
                     android:max="500"
                     android:progress="100"
-                    android:progressTint="#7C5CFC"
-                    android:thumbTint="#7C5CFC"
+                    android:progressTint="@color/colorSecondary"
+                    android:thumbTint="@color/colorSecondary"
                     android:layout_marginTop="16dp" />
 
                 <com.google.android.material.button.MaterialButton
@@ -110,8 +224,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginTop="20dp"
+                    android:text="Confirm Location"
+                    android:textColor="@color/colorButtonText"
                     app:cornerRadius="12dp"
-                    android:text="Confirm Location" />
+                    app:backgroundTint="@color/colorButton" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
@@ -132,7 +248,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Event Ready!"
-            android:textColor="#F0F0F5"
+            android:textColor="@color/colorOnSurface"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -140,7 +256,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Please review and save to Firestore."
-            android:textColor="#6B6E8E"
+            android:textColor="@color/colorMuted"
             android:layout_marginTop="8dp"/>
 
         <com.google.android.material.button.MaterialButton
@@ -148,7 +264,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Create Event" />
+            android:text="Create Event"
+            android:textColor="@color/colorButtonText"
+            app:backgroundTint="@color/colorButton" />
     </LinearLayout>
 
     <!-- STEP 4: SUCCESS PAGE -->
@@ -169,7 +287,7 @@
             app:cardBackgroundColor="#1A22C55E"
             app:cardCornerRadius="60dp"
             app:cardElevation="0dp"
-            app:strokeColor="#22C55E"
+            app:strokeColor="@color/colorSecondary"
             app:strokeWidth="2dp">
 
             <ImageView
@@ -177,7 +295,7 @@
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:src="@android:drawable/checkbox_on_background"
-                app:tint="#22C55E" />
+                app:tint="@color/colorSecondary" />
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
@@ -185,7 +303,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="Event Created!"
-            android:textColor="#F0F0F5"
+            android:textColor="@color/colorOnSurface"
             android:textSize="26sp"
             android:textStyle="bold" />
 
@@ -195,7 +313,7 @@
             android:layout_marginTop="12dp"
             android:gravity="center"
             android:text="Your event has been successfully saved.\nAttendees can now scan the QR code."
-            android:textColor="#6B6E8E"
+            android:textColor="@color/colorMuted"
             android:textSize="16sp" />
 
         <TextView
@@ -203,7 +321,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:text="Tap 'Events' in the menu below to view your list."
-            android:textColor="#7C5CFC"
+            android:textColor="@color/colorPrimary"
             android:textSize="14sp"
             android:textStyle="italic" />
 

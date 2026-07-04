@@ -3,18 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0E0F16">
+    android:background="@color/colorBackground">
 
-    <!-- Added Toolbar to provide the "space at the top" -->
+    <!-- Toolbar with new primary color -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#0E0F16"
+        android:background="@color/colorPrimary"
+        app:titleTextColor="@color/white"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Nav Host Fragment -->
     <fragment
         android:id="@+id/nav_host_fragment_user"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -25,16 +27,17 @@
         app:layout_constraintBottom_toTopOf="@id/bottomNavUser"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" /> <!-- Constraints updated to bottom of toolbar -->
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
+    <!-- Bottom Navigation with new colors - FIXED -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_nav_user"
-        android:background="#161720"
-        app:itemIconTint="#7C5CFC"
-        app:itemTextColor="#F0F0F5" />
+        android:background="@color/colorSurface"
+        app:itemIconTint="@color/colorPrimary"
+        app:itemTextColor="@color/colorPrimary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

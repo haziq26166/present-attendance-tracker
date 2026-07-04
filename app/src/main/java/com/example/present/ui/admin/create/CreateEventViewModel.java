@@ -50,8 +50,6 @@ public class CreateEventViewModel extends ViewModel {
 
         event.qrPayload = json.toString();
 
-        event.qrPayload = json.toString();
-
         step.setValue(CreateStep.DONE);
     }
 

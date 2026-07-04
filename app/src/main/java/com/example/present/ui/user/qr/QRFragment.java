@@ -1,6 +1,7 @@
 package com.example.present.ui.user.qr;
 
 import android.annotation.SuppressLint;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.os.Bundle;
@@ -58,9 +59,10 @@ public class QRFragment extends Fragment {
     private ExecutorService cameraExecutor;
     private FusedLocationProviderClient locationClient;
 
-    // Updated: Using LocationCallback instead of Handler/Runnable loop
+    // FIX 13: Proper LocationCallback with cleanup
     private LocationCallback locationCallback;
     private boolean isGpsUpdating = false;
+    private boolean isGpsCallbackRegistered = false;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -102,7 +104,6 @@ public class QRFragment extends Fragment {
         }
     }
 
-    // ... (startQRScanner and processQrPayload remain the same) ...
     private void startQRScanner() {
         if (!PermissionUtils.hasPermissions(requireContext())) {
             PermissionUtils.requestPermissions(requireActivity());
@@ -164,15 +165,31 @@ public class QRFragment extends Fragment {
         }
     }
 
+    /**
+     * FIX 13: Improved GPS tracking with proper callback management
+     */
     @SuppressLint("MissingPermission")
     private void startGPSTracking() {
-        if (isGpsUpdating) return; // Prevent multiple instances
+        if (isGpsUpdating || isGpsCallbackRegistered) {
+            // If already tracking, don't start again
+            return;
+        }
+
+        // Check if we have permission
+        if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            handleFailure("Location permission is required for GPS verification");
+            return;
+        }
 
         isGpsUpdating = true;
+
         LocationRequest locationRequest = new LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 2000)
                 .setMinUpdateIntervalMillis(1000)
+                .setWaitForAccurateLocation(false)
                 .build();
 
+        // Create callback with proper error handling
         locationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(@NonNull LocationResult locationResult) {
@@ -181,16 +198,47 @@ public class QRFragment extends Fragment {
                     updateGpsUI(location);
                 }
             }
+
+            @Override
+            public void onLocationAvailability(@NonNull com.google.android.gms.location.LocationAvailability locationAvailability) {
+                if (!locationAvailability.isLocationAvailable()) {
+                    requireActivity().runOnUiThread(() -> {
+                        Toast.makeText(getContext(), "GPS signal lost. Please enable GPS.", Toast.LENGTH_SHORT).show();
+                    });
+                }
+            }
         };
 
-        locationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
+        try {
+            locationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
+            isGpsCallbackRegistered = true;
+            Log.d("GPS_DEBUG", "GPS tracking started successfully");
+        } catch (SecurityException e) {
+            isGpsUpdating = false;
+            isGpsCallbackRegistered = false;
+            handleFailure("Location permission denied. Please enable in settings.");
+        } catch (Exception e) {
+            isGpsUpdating = false;
+            isGpsCallbackRegistered = false;
+            handleFailure("GPS error: " + e.getMessage());
+        }
     }
 
+    /**
+     * FIX 13: Properly stops GPS tracking and cleans up callback
+     */
     private void stopGPSTracking() {
-        isGpsUpdating = false;
-        if (locationClient != null && locationCallback != null) {
-            locationClient.removeLocationUpdates(locationCallback);
+        if (locationClient != null && locationCallback != null && isGpsCallbackRegistered) {
+            try {
+                locationClient.removeLocationUpdates(locationCallback);
+                isGpsCallbackRegistered = false;
+                Log.d("GPS_DEBUG", "GPS tracking stopped successfully");
+            } catch (Exception e) {
+                Log.e("GPS_DEBUG", "Error stopping GPS: " + e.getMessage());
+            }
         }
+        isGpsUpdating = false;
+        // Don't nullify locationCallback here as we might need it for comparison
     }
 
     private void updateGpsUI(Location current) {
@@ -211,7 +259,6 @@ public class QRFragment extends Fragment {
         }
     }
 
-    // ... (Remaining methods: startSelfieCamera, takeSelfie, uploadAndFinalize, saveAttendanceToFirestore) ...
     private void startSelfieCamera() {
         if (binding == null) return;
         ListenableFuture<ProcessCameraProvider> cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext());
@@ -270,6 +317,8 @@ public class QRFragment extends Fragment {
             requireActivity().runOnUiThread(() -> {
                 binding.photoLoading.setVisibility(View.GONE);
                 Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                // Go back to QR scan on error
+                viewModel.setCurrentStep(QRViewModel.QRStep.QR_SCAN);
             });
         }
     }
@@ -357,10 +406,29 @@ public class QRFragment extends Fragment {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        // FIX 13: Stop GPS when fragment goes to background
+        stopGPSTracking();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        // FIX 13: Ensure GPS is stopped when fragment stops
+        stopGPSTracking();
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (cameraExecutor != null) cameraExecutor.shutdown();
+        // FIX 13: Clean up resources
         stopGPSTracking();
+        if (cameraExecutor != null) {
+            cameraExecutor.shutdownNow();
+        }
+        // Clear callback reference
+        locationCallback = null;
         binding = null;
     }
 }

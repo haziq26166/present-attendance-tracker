@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0E0F16"
+    android:background="@color/colorBackground"
     android:orientation="vertical"
     android:padding="24dp"
     android:gravity="center_horizontal">
@@ -12,30 +12,23 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="60dp"
-        android:src="@drawable/ic_launcher_foreground"
-        app:tint="#7C5CFC" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Present!"
-        android:textColor="#F0F0F5"
-        android:textSize="32sp"
-        android:textStyle="bold" />
+        android:src="@drawable/present2"/>
 
     <!-- Email Input -->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:boxStrokeColor="@color/colorPrimary"
+        app:hintTextColor="@color/colorPrimary">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            android:textColor="#F0F0F5" />
+            android:textColor="@color/colorOnSurface" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Password Input -->
@@ -43,14 +36,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:boxStrokeColor="@color/colorPrimary"
+        app:hintTextColor="@color/colorPrimary">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
             android:inputType="textPassword"
-            android:textColor="#F0F0F5" />
+            android:textColor="@color/colorOnSurface" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
@@ -59,8 +54,9 @@
         android:layout_height="56dp"
         android:layout_marginTop="40dp"
         android:text="Log In"
+        android:textColor="@color/colorButtonText"
         app:cornerRadius="12dp"
-        app:backgroundTint="#7C5CFC" />
+        app:backgroundTint="@color/colorButton" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -75,6 +71,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Don't have an account? Register"
-        android:textColor="#7C5CFC" />
+        android:textColor="@color/colorPrimary" />
 
 </LinearLayout>

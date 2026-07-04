@@ -22,7 +22,11 @@ public class AdminProfileFragment extends Fragment {
         auth.fetchUserData(auth.getCurrentUser().getUid(), user -> {
             binding.tvAdminName.setText(user.displayName);
             binding.tvAdminEmail.setText(user.email);
-            binding.tvAdminInitial.setText(user.displayName.substring(0, 1).toUpperCase());
+            String initial = user.displayName != null && !user.displayName.isEmpty()
+                    ? user.displayName.substring(0, 1).toUpperCase()
+                    : "U";
+            binding.tvAdminInitial.setText(initial);
+
         }, e -> {});
 
         binding.btnAdminLogout.setOnClickListener(v -> {

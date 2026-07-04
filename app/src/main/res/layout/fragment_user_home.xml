@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="#0E0F16">
+    android:background="@color/colorBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="20dp"
-        android:paddingBottom="80dp"> <!-- Extra padding to clear Bottom Nav -->
+        android:paddingBottom="80dp">
 
         <!-- Header Section -->
         <TextView
@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hello!"
-            android:textColor="#F0F0F5"
+            android:textColor="@color/colorOnSurface"
             android:textSize="26sp"
             android:textStyle="bold" />
 
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Today's Date"
-            android:textColor="#6B6E8E"
+            android:textColor="@color/colorMuted"
             android:textSize="14sp" />
 
         <!-- Attendance Stats Card -->
@@ -37,9 +37,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            app:cardBackgroundColor="#161720"
+            app:cardBackgroundColor="@color/colorSurface"
             app:cardCornerRadius="16dp"
-            app:strokeColor="#1E1F2B"
+            app:strokeColor="@color/colorBorder"
             app:strokeWidth="1dp">
 
             <LinearLayout
@@ -53,7 +53,7 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:src="@drawable/ic_calendar"
-                    app:tint="#22C55E" />
+                    app:tint="@color/colorSecondary" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -65,7 +65,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Total Events Attended"
-                        android:textColor="#6B6E8E"
+                        android:textColor="@color/colorMuted"
                         android:textSize="12sp" />
 
                     <TextView
@@ -73,30 +73,38 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
-                        android:textColor="#F0F0F5"
+                        android:textColor="@color/colorOnSurface"
                         android:textSize="24sp"
                         android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- IMPROVISED Quick Guide Section -->
+        <!-- How to Use Section -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Quick Guide"
-            android:textColor="#F0F0F5"
-            android:textSize="18sp"
+            android:text="How to Check In"
+            android:textColor="@color/colorOnSurface"
+            android:textSize="20sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Follow these 4 simple steps to mark your attendance"
+            android:textColor="@color/colorMuted"
+            android:textSize="14sp" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            app:cardBackgroundColor="#161720"
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="@color/colorSurface"
             app:cardCornerRadius="16dp"
-            app:strokeColor="#1E1F2B"
+            app:strokeColor="@color/colorBorder"
             app:strokeWidth="1dp">
 
             <LinearLayout
@@ -109,123 +117,387 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
 
                     <TextView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:background="@drawable/ic_count_one"
-                        android:backgroundTint="#7C5CFC"
+                        android:backgroundTint="@color/colorPrimary"
                         android:gravity="center"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginStart="16dp"
-                        android:text="Tap the Scan tab at the bottom of your screen."
-                        android:textColor="#F0F0F5"
-                        android:textSize="14sp"
-                        android:lineSpacingExtra="4dp"/>
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Open the Scanner"
+                            android:textColor="@color/colorOnSurface"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tap the 'Scan' tab at the bottom of your screen to open the QR code scanner."
+                            android:textColor="@color/colorMuted"
+                            android:textSize="13sp"
+                            android:lineSpacingExtra="3dp" />
+                    </LinearLayout>
                 </LinearLayout>
 
-                <!-- Divider line -->
-                <View android:layout_width="1dp" android:layout_height="20dp" android:background="#1E1F2B" android:layout_marginStart="14dp"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="16dp"
+                    android:background="@color/colorBorder" />
 
                 <!-- Step 2 -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
 
                     <TextView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:background="@drawable/ic_count_two"
-                        android:backgroundTint="#7C5CFC"
+                        android:backgroundTint="@color/colorPrimary"
                         android:gravity="center"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginStart="16dp"
-                        android:text="Point camera at the venue QR. GPS will verify your location automatically."
-                        android:textColor="#F0F0F5"
-                        android:textSize="14sp"
-                        android:lineSpacingExtra="4dp"/>
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Scan the QR Code"
+                            android:textColor="@color/colorOnSurface"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Point your camera at the event's QR code displayed at the venue. The app will automatically detect and read it."
+                            android:textColor="@color/colorMuted"
+                            android:textSize="13sp"
+                            android:lineSpacingExtra="3dp" />
+                    </LinearLayout>
                 </LinearLayout>
 
-                <!-- Divider line -->
-                <View android:layout_width="1dp" android:layout_height="20dp" android:background="#1E1F2B" android:layout_marginStart="14dp"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="16dp"
+                    android:background="@color/colorBorder" />
 
                 <!-- Step 3 -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
 
                     <TextView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:background="@drawable/ic_count_three"
-                        android:backgroundTint="#7C5CFC"
+                        android:backgroundTint="@color/colorPrimary"
                         android:gravity="center"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginStart="16dp"
-                        android:text="Take a quick selfie to confirm your identity and secure your attendance."
-                        android:textColor="#F0F0F5"
-                        android:textSize="14sp"
-                        android:lineSpacingExtra="4dp"/>
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Verify Your Location"
+                            android:textColor="@color/colorOnSurface"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="GPS will automatically verify that you are within the event's geofence radius. Stay near the venue until verification is complete."
+                            android:textColor="@color/colorMuted"
+                            android:textSize="13sp"
+                            android:lineSpacingExtra="3dp" />
+                    </LinearLayout>
                 </LinearLayout>
 
-                <!-- Divider line -->
-                <View android:layout_width="1dp" android:layout_height="20dp" android:background="#1E1F2B" android:layout_marginStart="14dp"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="16dp"
+                    android:background="@color/colorBorder" />
 
-                <!-- Step 4 (Success) -->
+                <!-- Step 4 -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
 
                     <TextView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:background="@drawable/ic_count_four"
-                        android:backgroundTint="#22C55E"
+                        android:backgroundTint="@color/colorSecondary"
                         android:gravity="center"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginStart="16dp"
-                        android:text="Success! View your records anytime under the History tab."
-                        android:textColor="#F0F0F5"
-                        android:textSize="14sp"
-                        android:lineSpacingExtra="4dp"/>
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Take a Selfie and Confirm"
+                            android:textColor="@color/colorOnSurface"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Take a quick selfie to confirm your identity. Your attendance will be recorded instantly with photo verification."
+                            android:textColor="@color/colorMuted"
+                            android:textSize="13sp"
+                            android:lineSpacingExtra="3dp" />
+                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Spacer at bottom -->
+        <!-- Important Tips Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="💡 Important Tips"
+            android:textColor="@color/colorOnSurface"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="@color/colorSurface"
+            app:cardCornerRadius="16dp"
+            app:strokeColor="@color/colorBorder"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:gravity="center"
+                        android:text="📍"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="12dp"
+                        android:text="Make sure your GPS is turned ON and you are within the event venue for successful check-in."
+                        android:textColor="@color/colorMuted"
+                        android:textSize="13sp"
+                        android:lineSpacingExtra="3dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="12dp"
+                    android:background="@color/colorBorder" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:gravity="center"
+                        android:text="📸"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="12dp"
+                        android:text="Ensure good lighting when taking your selfie. The photo is stored as a verification record."
+                        android:textColor="@color/colorMuted"
+                        android:textSize="13sp"
+                        android:lineSpacingExtra="3dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="12dp"
+                    android:background="@color/colorBorder" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:gravity="center"
+                        android:text="📋"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="12dp"
+                        android:text="View your attendance history anytime under the 'History' tab. All your check-ins are stored securely."
+                        android:textColor="@color/colorMuted"
+                        android:textSize="13sp"
+                        android:lineSpacingExtra="3dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="12dp"
+                    android:background="@color/colorBorder" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:gravity="center"
+                        android:text="⚠️"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="12dp"
+                        android:text="Each QR code is unique to an event. You can only check in to an event once."
+                        android:textColor="@color/colorMuted"
+                        android:textSize="13sp"
+                        android:lineSpacingExtra="3dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Support Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="❓ Need Help?"
+            android:textColor="@color/colorOnSurface"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="@color/colorSurface"
+            app:cardCornerRadius="16dp"
+            app:strokeColor="@color/colorBorder"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="If you're having trouble checking in, make sure:"
+                    android:textColor="@color/colorOnSurface"
+                    android:textSize="14sp"
+                    android:lineSpacingExtra="4dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="✅ Your GPS is turned ON\n✅ You are at the event venue\n✅ You have granted camera permission\n✅ You have a stable internet connection"
+                    android:textColor="@color/colorMuted"
+                    android:textSize="13sp"
+                    android:lineSpacingExtra="6dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="📧 Contact the event organizer if you still face issues."
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="13sp"
+                    android:textStyle="italic" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="40dp" />

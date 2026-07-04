@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0E0F16">
+    android:background="@color/colorBackground">
 
     <com.example.present.ui.user.qr.StepIndicatorView
         android:id="@+id/stepIndicator"
@@ -42,14 +42,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Acquiring GPS..."
-            android:textColor="#F0F0F5"
+            android:textColor="@color/colorOnSurface"
             android:textSize="18sp" />
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/gpsProgress"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            app:trackThickness="8dp" />
+            app:trackThickness="8dp"
+            app:indicatorColor="@color/colorSecondary" />
     </LinearLayout>
 
     <!-- STEP 3: PHOTO CAPTURE -->
@@ -73,7 +74,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
             android:layout_marginBottom="40dp"
-            android:text="Capture Photo" />
+            android:text="Capture Photo"
+            android:textColor="@color/colorButtonText"
+            app:backgroundTint="@color/colorButton" />
         <ProgressBar
             android:id="@+id/photoLoading"
             android:layout_width="wrap_content"
@@ -96,26 +99,28 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/ic_verified"
-            app:tint="#22C55E" />
+            app:tint="@color/colorSecondary" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Check-in Successful!"
-            android:textColor="#F0F0F5"
+            android:textColor="@color/colorOnSurface"
             android:textSize="24sp"
             android:layout_marginTop="16dp" />
         <TextView
             android:id="@+id/tvDoneTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#6B6E8E"
+            android:textColor="@color/colorMuted"
             android:layout_marginTop="8dp" />
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnBackHome"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Back to Home" />
+            android:text="Back to Home"
+            android:textColor="@color/colorButtonText"
+            app:backgroundTint="@color/colorButton" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

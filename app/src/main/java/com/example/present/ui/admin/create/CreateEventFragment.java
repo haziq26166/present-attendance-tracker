@@ -42,6 +42,7 @@ public class CreateEventFragment extends Fragment implements OnMapReadyCallback 
     private Marker venueMarker;
     private Circle geofenceCircle;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1001;
+    private boolean isLocationPermissionGranted = false;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -140,7 +141,7 @@ public class CreateEventFragment extends Fragment implements OnMapReadyCallback 
                     public void handleOnBackPressed() {
                         if (binding.layoutSuccess.getVisibility() == View.VISIBLE) {
                             resetCreateForm();
-                            Navigation.findNavController(requireView()).navigate(R.id.action_create_to_list);
+                            Navigation.findNavController(requireView()).popBackStack();
                             return;
                         }
 
@@ -249,7 +250,7 @@ public class CreateEventFragment extends Fragment implements OnMapReadyCallback 
     @Override
     public void onMapReady(@NonNull GoogleMap map) {
         this.googleMap = map;
-        enableMyLocation();
+        checkAndRequestLocationPermission();
         LatLng defaultPos = new LatLng(-3.1390, 101.6869);
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultPos, 15f));
         googleMap.setOnMapClickListener(this::setEventLocation);
@@ -267,21 +268,60 @@ public class CreateEventFragment extends Fragment implements OnMapReadyCallback 
         });
     }
 
-    private void enableMyLocation() {
+    /**
+     * IMPROVED: Checks and requests location permission properly
+     */
+    private void checkAndRequestLocationPermission() {
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            googleMap.setMyLocationEnabled(true);
-            googleMap.getUiSettings().setMyLocationButtonEnabled(true);
+            isLocationPermissionGranted = true;
+            enableMyLocation();
         } else {
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
+            // Request permission
+            requestPermissions(new String[]{
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+            }, LOCATION_PERMISSION_REQUEST_CODE);
         }
     }
 
+    /**
+     * IMPROVED: Enables my location only if permission is granted
+     */
+    private void enableMyLocation() {
+        if (googleMap == null) return;
+
+        if (isLocationPermissionGranted) {
+            try {
+                googleMap.setMyLocationEnabled(true);
+                googleMap.getUiSettings().setMyLocationButtonEnabled(true);
+            } catch (SecurityException e) {
+                // Permission was revoked during runtime
+                isLocationPermissionGranted = false;
+                Toast.makeText(getContext(), "Location permission needed for map features", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(getContext(), "Location permission needed to find your location", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * IMPROVED: Properly handles permission request results
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                isLocationPermissionGranted = true;
                 enableMyLocation();
+            } else {
+                isLocationPermissionGranted = false;
+                // Permission denied - inform user but continue with map functionality
+                Toast.makeText(getContext(),
+                        "Location permission denied. You can manually tap on the map to set venue location.",
+                        Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -306,6 +346,11 @@ public class CreateEventFragment extends Fragment implements OnMapReadyCallback 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        // Clear map references to prevent memory leaks
+        if (googleMap != null) {
+            googleMap.setOnMapClickListener(null);
+            googleMap.setOnMapLongClickListener(null);
+        }
         binding = null;
     }
 }

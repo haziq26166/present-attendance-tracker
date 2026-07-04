@@ -3,23 +3,19 @@ package com.example.present.ui.user.history;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
 import com.example.present.data.model.AttendanceRecord;
 import com.example.present.data.repository.AuthRepository;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
-
 import java.util.List;
 
-/**
- * ViewModel responsible for providing a real-time stream of attendance records.
- * It removes the need for manual refreshes by using a Firestore SnapshotListener.
- */
 public class HistoryViewModel extends ViewModel {
     private final MutableLiveData<List<AttendanceRecord>> records = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>(false);
     private final AuthRepository authRepository;
     private ListenerRegistration historyListener;
+    private boolean isListenerAttached = false;
 
     public HistoryViewModel() {
         this.authRepository = new AuthRepository();
@@ -35,20 +31,26 @@ public class HistoryViewModel extends ViewModel {
 
         String uid = authRepository.getCurrentUser().getUid();
 
-        // Path: attendance collection -> filter by userId -> sort by date
-        // addSnapshotListener makes this "Real-Time"
+        // Remove any existing listener
+        if (historyListener != null) {
+            historyListener.remove();
+            historyListener = null;
+        }
+
+        isLoading.setValue(true);
+        isListenerAttached = true;
+
         historyListener = FirebaseFirestore.getInstance().collection("attendance")
                 .whereEqualTo("userId", uid)
                 .orderBy("checkedInAt", Query.Direction.DESCENDING)
                 .addSnapshotListener((snapshots, e) -> {
+                    isLoading.setValue(false);
+
                     if (e != null) {
-                        // In a production app, you might push an error state to the UI here
                         return;
                     }
 
                     if (snapshots != null) {
-                        // Automatically converts Firestore documents into AttendanceRecord objects
-                        // These objects must contain eventName, venueName, and photoUrl fields
                         List<AttendanceRecord> historyList = snapshots.toObjects(AttendanceRecord.class);
                         records.setValue(historyList);
                     }
@@ -56,19 +58,37 @@ public class HistoryViewModel extends ViewModel {
     }
 
     /**
-     * Observed by HistoryFragment to update the total count and the RecyclerView.
+     * Manually refresh data by reattaching the listener
      */
+    public void refreshData() {
+        if (authRepository.getCurrentUser() == null) return;
+
+        isLoading.setValue(true);
+
+        // Reattach listener to get fresh data
+        if (historyListener != null) {
+            historyListener.remove();
+            historyListener = null;
+        }
+
+        startListeningToHistory();
+    }
+
     public LiveData<List<AttendanceRecord>> getRecords() {
         return records;
+    }
+
+    public LiveData<Boolean> getIsLoading() {
+        return isLoading;
     }
 
     @Override
     protected void onCleared() {
         super.onCleared();
-        // CRITICAL: Remove the listener when the ViewModel is destroyed
-        // This prevents memory leaks and unnecessary data usage when the user leaves the screen
+        isListenerAttached = false;
         if (historyListener != null) {
             historyListener.remove();
+            historyListener = null;
         }
     }
 }

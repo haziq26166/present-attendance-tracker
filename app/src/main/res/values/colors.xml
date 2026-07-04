@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Basic Colors -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="colorPrimary">#7C5CFC</color>
-    <color name="colorSecondary">#22C55E</color>
-    <color name="colorBackground">#0E0F16</color>
-    <color name="colorSurface">#161720</color>
-    <color name="colorOnSurface">#F0F0F5</color>
-    <color name="colorMuted">#6B6E8E</color>
-    <color name="colorError">#EF4444</color>
+
+    <!-- App Theme Colors - NEW SCHEME -->
+    <color name="colorPrimary">#660033</color>          <!-- Main theme color -->
+    <color name="colorPrimaryDark">#4D0026</color>      <!-- Darker version of primary -->
+    <color name="colorSecondary">#D4AF37</color>        <!-- Active button / Gold -->
+    <color name="colorBackground">#F9F6F0</color>       <!-- Main background -->
+    <color name="colorSurface">#FFFFFF</color>          <!-- Card/Surface background -->
+    <color name="colorOnSurface">#31090E</color>        <!-- Main text color -->
+    <color name="colorMuted">#666666</color>            <!-- Muted text -->
+    <color name="colorError">#DC3545</color>            <!-- Error color -->
+
+    <!-- Button Colors -->
+    <color name="colorButton">#58111A</color>           <!-- Main button -->
+    <color name="colorButtonActive">#D4AF37</color>     <!-- Active button -->
+    <color name="colorButtonText">#FFFFFF</color>       <!-- Button text -->
+
+    <!-- Border Colors -->
+    <color name="colorBorder">#E0D5C8</color>           <!-- Light border -->
+    <color name="colorBorderLight">#F0EAE0</color>      <!-- Very light border -->
+
+    <!-- Status Colors -->
     <color name="colorVerified">#22C55E</color>
     <color name="colorFlagged">#F59E0B</color>
-    
-    <!-- This is the missing color causing your error -->
-    <color name="colorBorder">#2A2B3D</color>
 </resources>

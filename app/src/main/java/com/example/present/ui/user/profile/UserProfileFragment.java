@@ -23,7 +23,10 @@ public class UserProfileFragment extends Fragment {
         authRepository.fetchUserData(authRepository.getCurrentUser().getUid(), user -> {
             binding.tvProfileName.setText(user.displayName);
             binding.tvProfileEmail.setText(user.email);
-            binding.tvAvatarInitial.setText(user.displayName.substring(0, 1).toUpperCase());
+            String initial = user.displayName != null && !user.displayName.isEmpty()
+                    ? user.displayName.substring(0, 1).toUpperCase()
+                    : "U";
+            binding.tvAvatarInitial.setText(initial);
         }, e -> {});
 
         binding.btnLogout.setOnClickListener(v -> {

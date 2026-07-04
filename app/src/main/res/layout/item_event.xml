@@ -4,8 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
-    app:cardBackgroundColor="#161720"
-    app:cardCornerRadius="12dp">
+    app:cardBackgroundColor="@color/colorSurface"
+    app:cardCornerRadius="12dp"
+    app:strokeColor="@color/colorBorder"
+    app:strokeWidth="1dp">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Workshop"
-            android:textColor="#F0F0F5"
+            android:textColor="@color/colorOnSurface"
             android:textSize="18sp"
             android:textStyle="bold"/>
 
@@ -26,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvEventTitle"
             android:text="Room 101"
-            android:textColor="#6B6E8E"/>
+            android:textColor="@color/colorMuted"/>
 
         <TextView
             android:id="@+id/tvEventDate"
@@ -34,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvEventVenue"
             android:text="May 28, 2025"
-            android:textColor="#7C5CFC"
+            android:textColor="@color/colorSecondary"
             android:textSize="12sp"/>
 
         <ImageButton
@@ -44,9 +47,9 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@android:drawable/ic_menu_more"
+            android:src="@drawable/ic_menu_more"
             android:contentDescription="More options"
-            app:tint="#6B6E8E" />
+            app:tint="@color/colorMuted" />
 
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>
