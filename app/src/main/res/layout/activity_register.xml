@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:text="Join the Present! community"
+            android:text="Start your attendance journey today"
             android:textColor="@color/colorMuted"
             android:textSize="14sp" />
 
